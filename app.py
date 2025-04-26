@@ -2,8 +2,8 @@ import asyncio
 import streamlit as st
 from doc_generator import DocGenerator
 
-st.set_page_config(page_title="🧠 AutoCodeDocGen App", layout="wide")
-st.title("📑 Automated Code Documentation Generator (Multi-language)")
+st.set_page_config(page_title="AutoCodeDocGen App", layout="wide")
+st.title("📑 Automated Code Documentation Generator (Multi-Programming language)")
 
 # Initialize DocGenerator
 doc_generator = DocGenerator()
