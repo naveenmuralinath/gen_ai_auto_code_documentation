@@ -1,0 +1,9 @@
+streamlit
+langchain
+requests
+python-dotenv
+huggingface_hub
+asyncio
+transformers
+httpx
+ollama
