@@ -5,7 +5,7 @@ from doc_generator import DocGenerator
 st.set_page_config(page_title="🧠 AutoCodeDocGen App", layout="wide")
 st.title("📑 Automated Code Documentation Generator (Multi-language)")
 
-# Initialize the DocGenerator
+# Initialize DocGenerator
 doc_generator = DocGenerator()
 
 # File uploader
@@ -16,7 +16,7 @@ if uploaded_file is not None:
     st.subheader("📜 Uploaded Code")
     st.code(code, language='auto')
 
-    # Select programming language
+    # Select language
     language = st.selectbox(
         "Select the programming language:",
         ["python", "java", "c++", "javascript", "go", "ruby", "php", "typescript", "c"]
@@ -24,7 +24,7 @@ if uploaded_file is not None:
 
     # Button to trigger generation
     if st.button("🚀 Generate Documentation"):
-        st.info("⏳ Generating documentation...please wait.")
+        st.info("⏳ Generating documentation...please wait. This may take a minute for large files.")
 
         output_area = st.empty()
 
@@ -36,7 +36,6 @@ if uploaded_file is not None:
 
             st.success("✅ Documentation generation completed!")
 
-            # Download button
             st.download_button(
                 label="📥 Download Documentation (Markdown)",
                 data=documentation,
@@ -44,5 +43,5 @@ if uploaded_file is not None:
                 mime="text/markdown"
             )
 
-        # Handle asyncio inside Streamlit
+        # Handle asyncio inside Streamlit safely
         asyncio.run(generate_and_stream())

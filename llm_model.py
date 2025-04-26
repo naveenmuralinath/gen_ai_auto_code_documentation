@@ -1,9 +1,10 @@
-import asyncio
+# llm_model.py
+
 import ollama
 from typing import AsyncGenerator
 
 class LLMModel:
-    def __init__(self, model_name: str = "deepseek-coder:1.3b", temperature: float = 0.5, top_p: float = 0.95, max_tokens: int = 200):
+    def __init__(self, model_name: str = "deepseek-coder:1.3b", temperature: float = 0.5, top_p: float = 0.95, max_tokens: int = 4096):
         self.model_name = model_name
         self.temperature = temperature
         self.top_p = top_p
@@ -13,12 +14,13 @@ class LLMModel:
         """
         Async generator that streams responses from Ollama.
         """
-        response =ollama.chat(
+        client = ollama.AsyncClient()
+
+        response = await client.chat(
             model=self.model_name,
-            #prompt=prompt,
             messages=[
-            {"role": "user", "content": prompt}
-        ],
+                {"role": "user", "content": prompt}
+            ],
             stream=True,
             options={
                 "temperature": self.temperature,
@@ -28,4 +30,7 @@ class LLMModel:
         )
 
         async for chunk in response:
-            yield chunk['message']['content']
+            if 'message' in chunk and 'content' in chunk['message']:
+                yield chunk['message']['content']
+            else:
+                continue  # Safety check

@@ -1,9 +1,5 @@
-streamlit
-langchain
-requests
-python-dotenv
-huggingface_hub
+streamlit>=1.32
 asyncio
-transformers
-httpx
-ollama
+ollama>=0.1.7
+httpx>=0.27.0
+typing-extensions
